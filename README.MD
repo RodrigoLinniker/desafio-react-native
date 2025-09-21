@@ -55,4 +55,15 @@ yarn ios
 ### Observações
 
 A API utilizada é a GNews API, sendo necessário gerar uma chave gratuita para testes e colocar no .env :
-EXPO_PUBLIC_GNEWS_API_TOKEN="CHAVEAPI"
+**EXPO_PUBLIC_GNEWS_API_TOKEN="CHAVEAPI"**
+
+---
+
+### Decisões técnicas
+
+- **React Native com Expo** — Simplifica o desenvolvimento mobile e permite builds rápidos em Android e iOS sem configuração complexa.
+- **React Query** — Gerencia requisições assíncronas, cache de dados e scroll infinito de notícias de forma eficiente, garantindo atualização automática da interface.
+- **Axios com Interceptors e Toasts** — Centraliza o tratamento de erros da API, exibindo mensagens de toast para o usuário em caso de falhas ou ausência de conexão.
+- **AsyncStorage** — Armazena notícias offline, garantindo que o usuário veja conteúdo mesmo sem conexão com a internet.
+- **NativeWind** — Facilita a estilização rápida e responsiva, mantendo consistência visual em todo o app.
+- **Estrutura modular** — Separação entre hooks, controllers e componentes para manter o código organizado, testável e escalável.
