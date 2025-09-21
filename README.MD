@@ -30,7 +30,7 @@ Aplicativo de notícias desenvolvido em React Native com Expo e React Query, per
 
 ```bash
 # Clonar o repositório
-git https://github.com/RodrigoLinniker/desafio-react-native.git
+git clone https://github.com/RodrigoLinniker/desafio-react-native.git
 
 # Entrar no diretório
 cd desafio-react-native
