@@ -6,10 +6,11 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { NewsItem } from "../../components/NewItems";
+
 import { Loading } from "../../components/Loading";
 import { cn } from "../../utils/cn";
 import useHomeController from "./useHomeController";
+import { NewsItem } from "../../components/NewItems";
 
 export default function Home() {
   const {
@@ -63,13 +64,16 @@ export default function Home() {
 
         <FlatList
           data={articles}
-          keyExtractor={(item, i) => i.toString()}
+          keyExtractor={(item) => item.url || item.publishedAt}
           renderItem={({ item }) => <NewsItem item={item} />}
           onEndReached={() => hasNextPage && fetchNextPage()}
           onEndReachedThreshold={0.5}
           ListFooterComponent={
             isFetchingNextPage ? <ActivityIndicator className="mt-4" /> : null
           }
+          removeClippedSubviews
+          maxToRenderPerBatch={10}
+          initialNumToRender={10}
         />
       </View>
     </View>
