@@ -3,6 +3,7 @@ import Toast from "react-native-toast-message";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import "../styles/global.css";
 import RootLayout from ".";
+import { FavoritesProvider } from "../context/FavoritesContext";
 
 const queryClient = new QueryClient();
 
@@ -10,8 +11,10 @@ export default function Layout() {
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
-        <RootLayout />
-        <Toast />
+        <FavoritesProvider>
+          <RootLayout />
+          <Toast />
+        </FavoritesProvider>
       </QueryClientProvider>
     </SafeAreaProvider>
   );

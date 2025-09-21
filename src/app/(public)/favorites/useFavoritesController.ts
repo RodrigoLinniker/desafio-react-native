@@ -1,4 +1,4 @@
-import { useFavorites } from "../../../hooks/useFavorites";
+import { useFavorites } from "../../../context/FavoritesContext";
 
 export default function useFavoritesController() {
   const { favorites } = useFavorites();

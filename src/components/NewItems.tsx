@@ -1,25 +1,27 @@
-import React from "react";
-import { Text, Image, TouchableOpacity, View } from "react-native";
+import { memo } from "react";
+import { Text, Image, TouchableOpacity, View, ViewStyle } from "react-native";
 import { Article } from "../services/newService";
 import { formatDate } from "../utils/formatDate";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useFavorites } from "../hooks/useFavorites";
 import { useRouter } from "expo-router";
+import { useFavorites } from "../context/FavoritesContext";
 
 interface Props {
   item: Article;
 }
 
-export function NewsItem({ item }: Props) {
+export const NewsItem = memo(({ item }: Props) => {
   const router = useRouter();
   const { toggleFavorite, isFavorite } = useFavorites();
 
   return (
-    <View className="mb-4">
+    <View className="mb-4 relative bg-black/20 rounded-xl">
       <TouchableOpacity
-        onPress={() => toggleFavorite(item)}
+        onPress={(e) => {
+          e.stopPropagation();
+          toggleFavorite(item);
+        }}
         className="absolute w-10 h-10 items-center justify-center right-0 top-0 z-10"
-        onPressIn={(e) => e.stopPropagation()}
       >
         <FontAwesome
           name={isFavorite(item) ? "star" : "star-o"}
@@ -36,14 +38,19 @@ export function NewsItem({ item }: Props) {
           })
         }
       >
-        {item.image && (
+        {item.image ? (
           <Image
             source={{ uri: item.image }}
             className="w-full h-44 rounded-lg mb-2"
           />
+        ) : (
+          <View className="w-full h-44 rounded-lg bg-gray-700 items-center justify-center mb-2">
+            <Text className="text-white">Imagem não encontrada</Text>
+          </View>
         )}
-        <View className="flex-row justify-between items-center">
-          <View>
+
+        <View className="flex-row justify-between items-center px-2 pb-2">
+          <View className="flex-1">
             <Text className="text-lg text-white font-bold">{item.title}</Text>
             <Text className="text-gray-500">{item.source?.name}</Text>
             <Text className="text-xs text-gray-400">
@@ -54,4 +61,4 @@ export function NewsItem({ item }: Props) {
       </TouchableOpacity>
     </View>
   );
-}
+});
