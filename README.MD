@@ -21,7 +21,7 @@ Aplicativo de notícias desenvolvido em React Native com Expo e React Query, per
 
 ### Pré-requisitos
 
-- Node.js (>= 20)
+- Node.js (>= 20.19.5)
 - Yarn ou NPM
 - Android Studio ou Xcode configurado
 - Emulador ou dispositivo físico
