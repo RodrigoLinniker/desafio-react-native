@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNews } from "../../hooks/useNews";
 import { Article } from "../../services/newService";
 
 export default function useHomeController() {
-  const [keyword, setKeyword] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [keyword, setKeyword] = useState("");        
   const [category, setCategory] = useState<string>("");
+  
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      setKeyword(searchInput);
+    }, 500);
+
+    return () => clearTimeout(delayDebounce);
+  }, [searchInput]);
 
   const categoriesMap: Record<string, string> = {
     Geral: "general",
@@ -22,9 +31,9 @@ export default function useHomeController() {
     data?.pages.flatMap((page) => page.articles) || [];
 
   return {
-    keyword,
+    searchInput,
+    setSearchInput,
     category,
-    setKeyword,
     setCategory,
     fetchNextPage,
     hasNextPage,
@@ -34,3 +43,4 @@ export default function useHomeController() {
     categories,
   };
 }
+
